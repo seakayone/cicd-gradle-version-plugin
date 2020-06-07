@@ -1,0 +1,22 @@
+pluginManagement {
+    repositories {
+        jcenter()
+        gradlePluginPortal()
+    }
+}
+
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath "org.kordamp.gradle:settings-gradle-plugin:${kordampVersion}"
+    }
+}
+apply plugin: 'org.kordamp.gradle.settings'
+
+rootProject.name = 'kordamp-gradle-plugins'
+
+projects {
+    directories = ['plugins', 'subprojects']
+}
