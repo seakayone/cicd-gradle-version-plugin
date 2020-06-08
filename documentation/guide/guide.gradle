@@ -15,26 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-    repositories {
-        jcenter()
-        gradlePluginPortal()
-    }
+plugins {
+    id 'org.kordamp.gradle.guide' version "${kordampVersion}"
 }
-
-buildscript {
-    repositories {
-        gradlePluginPortal()
-    }
-    dependencies {
-        classpath "org.kordamp.gradle:settings-gradle-plugin:${kordampVersion}"
-    }
-}
-apply plugin: 'org.kordamp.gradle.settings'
-
-rootProject.name = 'kordamp-gradle-plugins'
-
-projects {
-    directories = ['documentation', 'subprojects']
-}
-

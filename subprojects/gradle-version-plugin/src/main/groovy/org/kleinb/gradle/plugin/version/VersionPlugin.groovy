@@ -15,26 +15,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-    repositories {
-        jcenter()
-        gradlePluginPortal()
-    }
-}
+package org.kleinb.gradle.plugin.version
 
-buildscript {
-    repositories {
-        gradlePluginPortal()
-    }
-    dependencies {
-        classpath "org.kordamp.gradle:settings-gradle-plugin:${kordampVersion}"
-    }
-}
-apply plugin: 'org.kordamp.gradle.settings'
+import groovy.transform.CompileStatic
+import org.ajoberstar.grgit.Grgit
+import org.gradle.api.Plugin
+import org.gradle.api.Project
 
-rootProject.name = 'kordamp-gradle-plugins'
+@CompileStatic
+class VersionPlugin implements Plugin<Project> {
 
-projects {
-    directories = ['documentation', 'subprojects']
+    @Override
+    void apply(Project project) {
+        String rootPath = project.getRootDir().path.toString();
+        def git = Grgit.open([dir: (Object) rootPath])
+
+        project.version = git.head().abbreviatedId;
+    }
 }
 

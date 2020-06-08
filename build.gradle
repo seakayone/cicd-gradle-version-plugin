@@ -1,43 +1,51 @@
 /*
- *    Copyright 2020 Christian Kleinbölting
+ * SPDX-License-Identifier: Apache-2.0
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ * Copyright 2020 Christian Kleinbölting.
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 plugins {
     id 'org.kordamp.gradle.groovy-project' version "$kordampVersion"
+    id 'org.kordamp.gradle.plugin' version "$kordampVersion" apply false
+    id 'idea'
 }
+
 
 config {
     release = (rootProject.findProperty('release') ?: false).toBoolean()
 
     info {
-        name        = 'Mockito - The Good, The Bad, The Ugly'
-        vendor      = 'Seakayone'
-        description = 'Showcase for usage of mockito mocking frame work, pros and cons'
+        name = rootProject.name
+        vendor = 'Seakayone'
+        description = 'Continuous deployment version gradle plugin'
+        inceptionYear = '2020'
+        tags = ['gradle plugin', 'continuous deployment']
 
         links {
-            website      = 'https://github.com/seakayone/mockito-good-bad-ugly'
-            issueTracker = 'https://github.com/seakayone/mockito-good-bad-ugly/issues'
-            scm          = 'https://github.com/seakayone/mockito-good-bad-ugly.git'
+            website = "https://github.com/seakayone/${rootProject.name}"
+            issueTracker = "https://github.com/seakayon/${rootProject.name}/issues"
+            scm = "https://github.com/seakayon/${rootProject.name}.git"
         }
 
         people {
             person {
-                id    = 'seakayone'
-                name  = 'Christian Kleinbölting'
+                id = 'seakayone'
+                name = 'Christian Kleinbölting'
                 roles = ['developer']
             }
         }
+
     }
 
     licensing {
@@ -52,6 +60,14 @@ config {
 allprojects {
     repositories {
         jcenter()
+        gradlePluginPortal()
+    }
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
     }
 }
 
